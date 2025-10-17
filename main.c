@@ -4,7 +4,7 @@
 #include "world_1.h"
 
 int main() {
-    int currentWorld = 1; // starts at current world
+    int currentWorld = 1; 
 
     switch (currentWorld) {
         case 1:
