@@ -31,18 +31,19 @@ void worldOne() {
         int plantSize = sizeof(plants) / sizeof(plants[0]);
         laneNumber += 3;
 
-        srand((unsigned int)time(NULL));
-        randomizePlants(plants, plantSize);
-        
-        int isLevelDone = 0;
-        int keyStroke;
-
         int i = 0;
         while (i < 3) {
             int firstThreeSunflowerLanes = rand() % laneNumber + 1;
             printf("Place plant %s on lane %d.\n", plants[1], firstThreeSunflowerLanes);  
             i++;
         }
+
+        srand((unsigned int)time(NULL));
+        randomizePlants(plants, plantSize);
+        
+        int isLevelDone = 0;
+        int keyStroke;
+
         while (isLevelDone != 1) {
             int plantIndex = rand() % plantSize;
             int randomLane = rand() % laneNumber + 1;
