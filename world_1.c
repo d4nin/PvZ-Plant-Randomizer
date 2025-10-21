@@ -2,10 +2,11 @@
 #include "includes.h"
 #include "randomizer.h"
 
-int currentLevel = 1;
+int currentLevel = 3;
 
 void worldOne() {
     start:printf("You're currently on: World 1, Level %d\n\n", currentLevel);
+    srand((unsigned int)time(NULL));
     int laneNumber = 0;
     if (currentLevel == 1) {
         char *plants[] = {"Peashooter"};
@@ -38,7 +39,6 @@ void worldOne() {
             i++;
         }
 
-        srand((unsigned int)time(NULL));
         randomizePlants(plants, plantSize);
         
         int isLevelDone = 0;
@@ -51,6 +51,31 @@ void worldOne() {
             
             keyStroke = getch();
             if (keyStroke == 'c') 
+                continue;
+            if (keyStroke == 'f') {
+                isLevelDone = 1;
+                currentLevel++;
+                goto start;
+            }
+        }
+    }
+    if (currentLevel == 3) {
+        char *plants[] = {"Peashooter", "Sunflower", "Cherry Bomb"};
+        int plantSize = sizeof(plants) / sizeof(plants[0]);
+        laneNumber += 3;
+
+        randomizePlants(plants, plantSize);
+        
+        int isLevelDone = 0;
+        int keyStroke;
+
+        while (isLevelDone != 1) {
+            int plantIndex = rand() % plantSize;
+            int randomLane = rand() % laneNumber + 1;
+            printf("Place plant %s on lane %d.\n", plants[plantIndex], randomLane);
+
+            keyStroke = getch();
+            if (keyStroke == 'c')
                 continue;
             if (keyStroke == 'f') {
                 isLevelDone = 1;
