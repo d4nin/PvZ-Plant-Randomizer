@@ -2,18 +2,19 @@
 #include "includes.h"
 #include "randomizer.h"
 
-int currentLevel = 3;
+int currentLevel = 1;
 
 void worldOne() {
     start:printf("You're currently on: World 1, Level %d\n\n", currentLevel);
     srand((unsigned int)time(NULL));
     int laneNumber = 0;
+    int isLevelDone = 0;
+    int keyStroke;
+
     if (currentLevel == 1) {
         char *plants[] = {"Peashooter"};
         laneNumber += 1;
-        int isLevelDone = 0;
-        int keyStroke;
-
+        
         printf("Place plant %s on lane %d.\n", plants[0], laneNumber);
         while (isLevelDone != 1) {
             keyStroke = getch();
@@ -40,9 +41,6 @@ void worldOne() {
         }
 
         randomizePlants(plants, plantSize);
-        
-        int isLevelDone = 0;
-        int keyStroke;
 
         while (isLevelDone != 1) {
             int plantIndex = rand() % plantSize;
@@ -65,9 +63,28 @@ void worldOne() {
         laneNumber += 3;
 
         randomizePlants(plants, plantSize);
-        
-        int isLevelDone = 0;
-        int keyStroke;
+
+        while (isLevelDone != 1) {
+            int plantIndex = rand() % plantSize;
+            int randomLane = rand() % laneNumber + 1;
+            printf("Place plant %s on lane %d.\n", plants[plantIndex], randomLane);
+
+            keyStroke = getch();
+            if (keyStroke == 'c')
+                continue;
+            if (keyStroke == 'f') {
+                isLevelDone = 1;
+                currentLevel++;
+                goto start;
+            }
+        }
+    }
+    if (currentLevel == 4) {
+        char *plants[] = {"Peashooter", "Sunflower", "Cherry Bomb", "Wall-Nut"};
+        int plantSize = sizeof(plants) / sizeof(plants[0]);
+        laneNumber += 5;
+
+        randomizePlants(plants, plantSize);
 
         while (isLevelDone != 1) {
             int plantIndex = rand() % plantSize;
