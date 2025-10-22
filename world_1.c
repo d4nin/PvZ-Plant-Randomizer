@@ -127,4 +127,26 @@ void worldOne() {
             }
         }
     }
+    if (currentLevel == 6) {
+        char *plants[] = {"Peashooter", "Sunflower", "Cherry Bomb", "Wall-Nut", "Potato Mine"};
+        int plantSize = sizeof(plants) / sizeof(plants[0]);
+        laneNumber += 5;
+
+        randomizePlants(plants, plantSize);
+
+        while (isLevelDone != 1) {
+            int plantIndex = rand() % plantSize;
+            int randomLane = rand() % laneNumber + 1;
+            printf("Place plant %s on lane %d.\n", plants[plantIndex], randomLane);
+
+            keyStroke = getch();
+            if (keyStroke == 'c') 
+                continue;
+            if (keyStroke == 'f') {
+                isLevelDone = 1;
+                currentLevel++;
+                goto start;
+            }
+        }
+    }
 }
