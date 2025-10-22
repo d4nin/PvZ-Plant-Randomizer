@@ -101,4 +101,30 @@ void worldOne() {
             }
         }
     }
+    if (currentLevel == 5) {
+        char *wallnuts[] = {"Wall-Nut", "Explode-O-Nut"};
+        int wallnutSize = sizeof(wallnuts) / sizeof(wallnuts[0]);
+        laneNumber += 5;
+
+        randomizePlants(wallnuts, wallnutSize);
+
+        while (isLevelDone != 1) {
+            int wallnutIndex = rand() % wallnutSize;
+            int randomLane = rand() % laneNumber + 1;
+            printf("BOWL %s INTO LANE %d\n", wallnuts[wallnutIndex], randomLane);
+
+            int CRAZY = rand() % 100;
+            if (CRAZY == 0) printf("I'M CRAZY!!!!!!!!\n");
+
+            keyStroke = getch();
+            if (keyStroke == 'c') {
+                continue;
+            }
+            if (keyStroke == 'f') {
+                isLevelDone = 1;
+                currentLevel++;
+                goto start;
+            }
+        }
+    }
 }
